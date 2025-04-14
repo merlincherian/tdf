@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  concourse-web:
+    image: concourse/concourse:latest
+    command: web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./concourse-data/web:/concourse-work-dir
+    depends_on:
+      - concourse-worker
+  concourse-worker:
+    image: concourse/concourse:latest
+    command: worker
+    volumes:
+      - ./concourse-data/worker:/concourse-work-dir
