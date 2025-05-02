@@ -94,11 +94,24 @@ const eventNewRoute = new Route({
   }),
 });
 
+const eventEditRoute = new Route({
+  path: '/edit/$eventId',
+  component: lazyRouteComponent(
+    () => import('@/pages/events/edit'),
+    'EditEventPage',
+  ),
+  getParentRoute: () => eventsRoute,
+  beforeLoad: ({ context }) => ({
+    ...context,
+    getBreadcrumbTitle: () => 'Edit Event',
+  }),
+});
+
 const rootRoutes = [
   rootRedirectRoute,
   dashboardRoute,
   venuesRoute.addChildren([venuesIndexRoute]),
-  eventsRoute.addChildren([eventsIndexRoute, eventNewRoute]),
+  eventsRoute.addChildren([eventsIndexRoute, eventNewRoute, eventEditRoute]),
   clientsRoute.addChildren([clientsIndexRoute]),
 ];
 

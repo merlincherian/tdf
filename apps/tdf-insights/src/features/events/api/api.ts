@@ -25,4 +25,10 @@ export const fetchCategories = async (): Promise<EventCategories[]> => {
   return (await response).data;
 };
 
-
+export const fetchEventById = async (eventId: number) => {
+  if (!eventId) {
+    throw new Error('Event ID is required');
+  }
+  const response = await client.get(`/api/events/${eventId}`);
+  return response.data; 
+};
